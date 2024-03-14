@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <title>Document</title>
+    <style>
+        #main {
+            width: 95%;
+            margin: 50px auto;
+            background-color: #D2E0FB;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-radius: 20px;
+            text-align: center; padding:15px ;
+        }
+        
+        img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 15px #7FC7D9  ;
+           
+        }
+        
+        #like,
+        #like2,#subscribe2,#subscribe {
+            margin:20px ;
+            padding:20px ;
+            background-color: #F3F8FF ;
+            border-radius: 20px;
+            transition: all 0.5s;
+        }
+        #like:hover{
+            transform: translatey(-3%);
+        }
+        #like2:hover{
+            transform: translatey(-3%);
+        }
+        #subscribe2:hover{
+            transform: translatey(-3%);
+        }
+        #subscribe:hover{
+            transform: translatey(-3%);
+        }
+        #add2,#ssbtn2,#ssbtn{
+            font-family: sans-serif;
+            font-weight: 300;
+            margin: 20px;
+            font-size:15px;
+            border: 0;
+            padding:15px 30px ;
+            border-radius: 0.3125rem;
+            box-shadow: 0.1875rem 0.1875rem #C6CFFF;
+            background-color: #f7ffff;
+            color: #AAB8C2;
+            transition: all 0.2s ease;
+            user-select: none;
+}
+#ssbtn{
+    margin: 15px; 
+    padding:13px 26px ;
+    font-size:13px;
+  
+}
+#ssbtn:active{
+    box-shadow: 0 0;
+  transform: translate(0.1875rem, 0.1875rem);
+ color: #E2264D;}
+
+ #ssbtn2:active {
+    box-shadow: 0 0;
+  transform: translate(0.1875rem, 0.1875rem);
+ color: #E2264D;
+}
+
+#add2:active{
+    box-shadow: 0 0;
+    transform: translate(0.1875rem, 0.1875rem);
+    color: #E2264D;
+}
+h1{
+font-size: 25px;
+color: #6f9bce;
+}
+
+.heart {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  width: 100px;
+  height:100px;
+  background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+  background-position: 0 0;
+  cursor: pointer;
+  transition: background-position 1s steps(28);
+  transition-duration: 0s;
+  
+  &.is-active {
+    transition-duration: 1s;
+    background-position: -2800px 0;
+  }
+}
+    </style>
+</head>
+
+<body>
+<div id="main">
+
+    <!-- local -->
+    <div id="like">
+        <img src="img/1.webp" alt="">
+
+       
+            <div class="heart" id="add"></div> 
+             <h1 id="count">0</h1>
+          
+         
+        <!-- <button id="add"><i class="fa-solid fa-heart"></i> </button> --></div>
+
+
+    <div id="subscribe">
+        <img src="img/2.webp" alt="">
+        <button id="ssbtn">Subscribe <i class="fa-solid fa-bell" ></i></button>
+        <h1 id="count_subscribe">0</h1>
+    </div>
+
+
+    <!-- session -->
+    <div id="like2">
+        <img src="img/3.jpg" alt="">
+        <button id="add2">Share <i class="fa-solid fa-share-nodes"></i></button>
+        <h1 id="count2">0</h1>
+    </div>
+
+
+    <div id="subscribe2">
+        <img src="img/4.webp" alt="">
+        <button id="ssbtn2">save <i class="fa-solid fa-bookmark"></i></button>
+        <h1 id="count_subscribe2">0</h1>
+    </div>
+
+
+</div>
+
+
+
+</body>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script>
+    // like
+    let count = Number(localStorage.getItem('count')) || 0;
+    document.querySelector("#count").innerHTML = count;
+    const add = () => {
+        count += 1;
+        document.querySelector("#count").innerHTML = count;
+        localStorage.setItem("count", count);
+    }
+    $(function() {
+  $(".heart").on("click", function() {
+    $(this).toggleClass("is-active");
+  });
+});
+    document.querySelector("#add").addEventListener("click", add);
+
+
+    let count_subscribe = Number(localStorage.getItem('count_subscribe')) || 0;
+    document.querySelector("#count_subscribe").innerHTML = count_subscribe;
+    const ssbtn = () => {
+        count_subscribe += 1;
+        document.querySelector("#count_subscribe").innerHTML = count_subscribe;
+        localStorage.setItem("count_subscribe", count_subscribe);
+    }
+
+    document.querySelector("#ssbtn").addEventListener("click", ssbtn);
+
+    //  session 
+    let count2 = Number(sessionStorage.getItem('count2')) || 0;
+    document.querySelector("#count2").innerHTML = count2;
+    const add2 = () => {
+        count2 += 1;
+        document.querySelector("#count2").innerHTML = count2;
+        sessionStorage.setItem("count2", count2);
+    }
+    document.querySelector("#add2").addEventListener("click", add2);
+
+
+    let count_subscribe2 = Number(sessionStorage.getItem('count_subscribe2')) || 0;
+    document.querySelector("#count_subscribe2").innerHTML = count_subscribe2;
+    const ssbtn2 = () => {
+        count_subscribe2 += 1;
+        document.querySelector("#count_subscribe2").innerHTML = count_subscribe2;
+        sessionStorage.setItem("count_subscribe2", count_subscribe2);
+    }
+
+    document.querySelector("#ssbtn2").addEventListener("click", ssbtn2);
+
+</script>
+
+</html>
